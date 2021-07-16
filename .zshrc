@@ -3,34 +3,14 @@ export TERM="xterm-256color"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 
-POWERLEVEL9K_MODE='nerdfont-complete'
-
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
-POWERLEVEL9K_OS_ICON_BACKGROUND="white"
-POWERLEVEL9K_OS_ICON_FOREGROUND="blue"
-POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
-
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv status command_execution_time background_jobs todo ram load rvm time)
-
-# more prompt elements that are suggested
-# (public_ip docker_machine pyenv nvm)          https://github.com/bhilburn/powerlevel9k#prompt-customization
-# Note: using public_ip is cool but when connection is down prompt waits for 10-20 seconds
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh os_icon context dir rbenv vcs)
-
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -75,22 +55,33 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
+    git-flow
     zsh-completions
     zsh-autosuggestions
     history-substring-search
     python
     httpie
     docker
-    lol
+    docker-compose
+    colored-man-pages
     pip
     pyenv
     redis-cli
     screen
     systemd
     web-search
-    k
-    # zsh-wakatime          # enable if you use wakatime with 'https://github.com/wbingli/zsh-wakatime'
     zsh-syntax-highlighting
+    node
+	npm
+	kubectl
+	ansible
+	colorize
+	copydir
+	encode64
+	extract
+	gcloud
+	helm
+	terraform
     )
 #plugins+=(zsh-nvm)
 
@@ -131,14 +122,14 @@ export PATH=$PATH:~/.local/bin
 NPM_PACKAGES="${HOME}/.npm"
 PATH="$NPM_PACKAGES/bin:$PATH"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPS="--extended"
+
 
 export MARKER_KEY_NEXT_PLACEHOLDER="\C-b"   #change maker key binding from Ctr+t to Ctr+b
 
 [[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
 
-export PATH=$PATH:~/.quickzsh/todo/bin    #usig alias doesn't properly work
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 autoload -U compinit && compinit        # zsh-completions
 # autoload bashcompinit                 # bash completions
@@ -203,12 +194,3 @@ ipgeo() {
     fi
 }
 
-# Show covid-19 spread stats
-corona() {
-    # Specify country otherwise shows stats for all
-    if [ "$1" ]; then
-        curl "https://corona-stats.online/$1"
-    else
-        curl "https://corona-stats.online"
-    fi
-}
